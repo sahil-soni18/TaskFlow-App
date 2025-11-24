@@ -1,4 +1,4 @@
-import { JwtPayload, varifyToken } from "@/utils/jwtService";
+import { JwtPayload, varifyToken } from "../utils/jwtService";
 import { NextFunction, Request, Response } from "express";
 
 declare global {
@@ -31,3 +31,11 @@ export const authenticate = async (
   }
 };
 
+export const requireRole = (roles: string[]) => {
+  return (req: Request, res: Response, next: NextFunction): Response | void => {
+    if (!req.user || !roles.includes(req.user.role)) {
+      return res.status(403).json({ message: "Forbidden" });
+    }
+    return next();
+  };
+};

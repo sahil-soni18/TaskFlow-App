@@ -1,5 +1,5 @@
-import Task from "@/models/task.model";
-import { ITask, ITaskDto } from "@/types/task";
+import Task from "../models/task.model";
+import { ITask, ITaskDto } from "../types/task";
 
 export class TaskService {
   static async createTask(taskData: ITaskDto, userId: string): Promise<ITask> {
@@ -7,7 +7,7 @@ export class TaskService {
       ...taskData,
       metadata: {
         createdBy: userId,
-        assignedTo: taskData.assignedTo,
+        assignedTo: taskData.assignedTo || userId,
       },
     });
     await task.save();

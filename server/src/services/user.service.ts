@@ -1,6 +1,7 @@
-import { IUser } from "@/types/user";
-import User from "@/models/user.model";
-import { generateToken } from "@/utils/jwtService";
+import { IUser } from "../types/user";
+import User from "../models/user.model";
+import { generateToken } from "../utils/jwtService";
+import bcrypt from "bcryptjs";
 
 export class UserService {
   static async Register(userData: {
@@ -15,6 +16,8 @@ export class UserService {
       throw new Error("User with this email already exists");
     }
 
+    const hashedPassword = await bcrypt.hash(userData.password, 10);
+    userData.password = hashedPassword;
     const user = new User(userData);
     await user.save();
 

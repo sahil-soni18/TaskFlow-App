@@ -7,7 +7,7 @@ export enum TaskStatus {
 }
 
 export interface ITask {
-  id: string;
+  _id: string;
   title: string;
   description: string;
   status: TaskStatus;
@@ -25,6 +25,6 @@ export interface ITaskDto {
   title: string;
   description: string;
   priority?: number;
-  assignedTo: string;
+  assignedTo?: string;
   tags?: string[];
 }

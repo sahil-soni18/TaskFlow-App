@@ -1,5 +1,5 @@
 import { model, Schema } from "mongoose";
-import { ITask, TaskStatus } from "@/types/task";
+import { ITask, TaskStatus } from "../types/task";
 
 const taskScheme = new Schema<ITask>(
   {
@@ -52,6 +52,8 @@ const taskScheme = new Schema<ITask>(
     timestamps: true,
   }
 );
+
+taskScheme.index({ title: 1 });
 
 const Task = model("Task", taskScheme);
 export default Task;

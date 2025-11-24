@@ -1,5 +1,5 @@
-import { UserService } from "@/services/user.service";
-import { loginSchema, registerSchema } from "@/validations/userValidation";
+import { UserService } from "../services/user.service";
+import { loginSchema, registerSchema } from "../validations/userValidation";
 import { Request, Response } from "express";
 
 export class UserController {
@@ -12,7 +12,7 @@ export class UserController {
           .json({ message: "Validation Error", errors: "Invalid Data" });
         return;
       }
-      const { user, token } = await UserService.Register(validatiion.data.body);
+      const { user, token } = await UserService.Register(validatiion.data);
       res.status(201).json({ user, token });
     } catch (error) {
       res.status(500).json({ message: "Internal Server Error" });
@@ -28,7 +28,7 @@ export class UserController {
           .json({ message: "Validation Error", errors: "Invalid Data" });
         return;
       }
-      const { user, token } = await UserService.Login(validation.data.body);
+      const { user, token } = await UserService.Login(validation.data);
       res.status(200).json({
         success: true,
         message: "Login Successful",

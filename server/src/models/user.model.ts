@@ -1,4 +1,4 @@
-import { IUser } from "@/types/user";
+import { IUser } from "../types/user";
 import { model, Schema } from "mongoose";
 import bcrypt from "bcryptjs";
 
