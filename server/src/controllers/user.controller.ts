@@ -32,14 +32,12 @@ export class UserController {
       res.status(200).json({
         success: true,
         message: "Login Successful",
-        data: {
-          user: {
-            email: user.email,
-            name: user.name,
-            role: user.role,
-          },
-          token,
+        user: {
+          email: user.email,
+          name: user.name,
+          role: user.role,
         },
+        token,
       });
     } catch (error) {
       res.status(500).json({ message: "Internal Server Error" });
